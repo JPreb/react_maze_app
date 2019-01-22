@@ -2,7 +2,7 @@
   "name": "react_maze_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/JPreb/react_maze_app",
+  "homepage": "https://JPreb.github.io/react_maze_app",
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
