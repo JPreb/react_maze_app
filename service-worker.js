@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/JPreb/react_maze_app/precache-manifest.14463b856e2ff994775c59591aabd728.js"
+  "/react_maze_app/precache-manifest.2c6160dc45fe2f60611a17f91262aeec.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/JPreb/react_maze_app/index.html", {
+workbox.routing.registerNavigationRoute("/react_maze_app/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
