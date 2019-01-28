@@ -3,7 +3,7 @@ import Maze from './Maze';
 
 class Game extends Component {
   render() {
-    let dimension = 15;
+    let dimension = 25;
     return(
       <div>
         <Maze dimension={dimension}/>

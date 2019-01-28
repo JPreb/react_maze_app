@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import Cell from './Cell';
 
 // Factory function to create cell objects
-function cell(r, c) {
-  this.r = r;
-  this.c = c;
+function cell(index) {
+  this.id = index;
   this.topWall = true;
   this.rightWall = true;
   this.bottomWall = true;
   this.leftWall = true;
   this.visited = false;
+  this.endCell = false;
 }
 
-// MAZE CLASS
 class Maze extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +38,7 @@ class Maze extends Component {
     let cells = [];
     for(let r = 0; r < dimension; r++) {
       for(let c = 0; c < dimension; c++) {
-        cells.push(new cell(r, c));
+        cells.push(new cell(r * dimension + c));
       }
     }
 
@@ -127,6 +126,23 @@ class Maze extends Component {
       }
     }
 
+    // Mark all cells back to not visited
+    cells.map(cell => cell.visited = false);
+
+    // Choose and set a random ending cell
+    // Chosen cell is a random cell in the top row
+    let randomEnd = Math.floor(Math.random() * dimension);
+    cells[randomEnd].endCell = true;
+
+    // Choose and set a random starting cell
+    // Chosen cell is a random cell in the bottom row
+    let min = cells.length - dimension;
+    let max = cells.length;
+    let randomStart = Math.floor(Math.random() * (max - min) + min);
+
+    // Mark start cell as current cell
+    cells[randomStart].visited = true;
+
     this.setState({cells: cells});
   }
 
@@ -142,19 +158,97 @@ class Maze extends Component {
     }
   }
 
+  updateCell = (currentCell) => {
+    this.setState(function(state, props) {
+      const { dimension } = props;
+      let up = -dimension;
+      let down = dimension;
+      let right = 1;
+      let left = -1;
+
+      let cells = state.cells;
+
+      // Pseudo Code:
+      // check if cell above is valid
+        // check if cell above has no bottom wall and current cell has no top wall (pathway open)
+          // check if above cell has been visited
+            // check if current cell is end cell
+              // if it is, win
+            // else mark current cell as visited (green)
+      if(currentCell + up >= 0) {
+        if(cells[currentCell].topWall === false && cells[currentCell + up].bottomWall === false) {
+          if(cells[currentCell + up].visited === true) {
+            if(cells[currentCell].endCell === true) {
+              console.log('you win');
+            } else {
+              cells[currentCell].visited = true;
+              cells[currentCell + up].visited = false;
+            }
+          }
+        }
+      }
+      
+      if(currentCell + down <= cells.length - 1) {
+        if(cells[currentCell].bottomWall === false && cells[currentCell + down].topWall === false) {
+          if(cells[currentCell + down].visited === true) {
+            if(cells[currentCell].endCell === true) {
+              console.log('you win');
+            } else {
+              cells[currentCell].visited = true;
+              cells[currentCell + down].visited = false;
+            }
+          }
+        }
+      } 
+      
+      if(currentCell + left >= 0) {
+        if(cells[currentCell].leftWall === false && cells[currentCell + left].rightWall === false) {
+          if(cells[currentCell + left].visited === true) {
+            if(cells[currentCell].endCell === true) {
+              console.log('you win');
+            } else {
+              cells[currentCell].visited = true;
+              cells[currentCell + left].visited = false;
+            }
+          }
+        }
+      } 
+      
+      if(currentCell + right <= cells.length - 1) {
+        if(cells[currentCell].rightWall === false && cells[currentCell + right].leftWall === false) {
+          if(cells[currentCell + right].visited === true) {
+            if(cells[currentCell].endCell === true) {
+              console.log('you win');
+            } else {
+              cells[currentCell].visited = true;
+              cells[currentCell + right].visited = false;
+            }
+          }
+        }
+      }
+
+      return {
+        cells: cells
+      };
+    });
+  }
+
   // This render includes iterating (mapping) through the cells array contained in the maze class state.
   // For each cell, it will create a cell component
   render() {
     return (
       <div style={this.getStyle()}>
-        {this.state.cells.map((cell) => (
-          <Cell 
-            key={"r" + cell.r + "c" + cell.c} 
-            id={"r" + cell.r + "c" + cell.c} 
+        {this.state.cells.map(cell => (
+          <Cell
+            key={cell.id} 
+            id={cell.id}
             topWall={cell.topWall}
             rightWall={cell.rightWall}
             bottomWall={cell.bottomWall}
             leftWall={cell.leftWall}
+            visited={cell.visited}
+            endCell={cell.endCell}
+            updateCell={this.updateCell}
           />
         ))}
       </div>
