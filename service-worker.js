@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react_maze_app/precache-manifest.a1b5d4a6fadefed4e5ad73a76ee2d631.js"
+  "/react_maze_app/precache-manifest.998f62c0f53b5e7b289e17914a2af93e.js"
 );
 
 workbox.clientsClaim();
