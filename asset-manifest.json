@@ -1,13 +1,13 @@
 {
-  "main.css": "/react_maze_app/static/css/main.332c957e.chunk.css",
-  "main.js": "/react_maze_app/static/js/main.eceba089.chunk.js",
-  "main.js.map": "/react_maze_app/static/js/main.eceba089.chunk.js.map",
+  "main.css": "/react_maze_app/static/css/main.9352dabe.chunk.css",
+  "main.js": "/react_maze_app/static/js/main.0ddb6e67.chunk.js",
+  "main.js.map": "/react_maze_app/static/js/main.0ddb6e67.chunk.js.map",
   "static/js/1.f739feb7.chunk.js": "/react_maze_app/static/js/1.f739feb7.chunk.js",
   "static/js/1.f739feb7.chunk.js.map": "/react_maze_app/static/js/1.f739feb7.chunk.js.map",
   "runtime~main.js": "/react_maze_app/static/js/runtime~main.60934868.js",
   "runtime~main.js.map": "/react_maze_app/static/js/runtime~main.60934868.js.map",
-  "static/css/main.332c957e.chunk.css.map": "/react_maze_app/static/css/main.332c957e.chunk.css.map",
+  "static/css/main.9352dabe.chunk.css.map": "/react_maze_app/static/css/main.9352dabe.chunk.css.map",
   "index.html": "/react_maze_app/index.html",
-  "precache-manifest.998f62c0f53b5e7b289e17914a2af93e.js": "/react_maze_app/precache-manifest.998f62c0f53b5e7b289e17914a2af93e.js",
+  "precache-manifest.e1ffac7acbfa77d160a18ee94c2441c5.js": "/react_maze_app/precache-manifest.e1ffac7acbfa77d160a18ee94c2441c5.js",
   "service-worker.js": "/react_maze_app/service-worker.js"
 }
