@@ -146,18 +146,23 @@ class Maze extends Component {
     this.setState({cells: cells});
   }
 
+  // Styling for grid
   getStyle = () => {
     return {
+
       margin: '0 auto',
-      height: '500px',
-      width: '500px',
+      height: '85vmin',
+      width: '85vmin',
       display: 'grid',
       gridTemplateColumns: `repeat(${this.props.dimension}, auto)`,
       gridTemplateRows: 'auto',
-      border: '1px solid black'
+      border: '2px solid black'
     }
   }
 
+  // This is called when the mouse hovers over a cell. It passes in the cell id and then this function determines
+  // if that cell is a valid cell to move to. If it is, it updates the cells array and re-renders the grid with the
+  // new cell background color as green.
   updateCell = (currentCell) => {
     this.setState(function(state, props) {
       const { dimension } = props;
@@ -168,18 +173,16 @@ class Maze extends Component {
 
       let cells = state.cells;
 
-      // Pseudo Code:
-      // check if cell above is valid
-        // check if cell above has no bottom wall and current cell has no top wall (pathway open)
-          // check if above cell has been visited
-            // check if current cell is end cell
-              // if it is, win
-            // else mark current cell as visited (green)
+      // Check if cell above is valid (not outside bounds of grid/maze)
       if(currentCell + up >= 0) {
+        // Check if cell above has no bottom wall and current cell has no top wall (pathway open)
         if(cells[currentCell].topWall === false && cells[currentCell + up].bottomWall === false) {
+          // Check if above cell has been visited
           if(cells[currentCell + up].visited === true) {
+            // Check if current cell is end cell, if it is, win the game
             if(cells[currentCell].endCell === true) {
-              console.log('you win');
+              this.props.onRouteChange('StartMenu');
+            // If not, mark current cell as visited (green)
             } else {
               cells[currentCell].visited = true;
               cells[currentCell + up].visited = false;
@@ -188,11 +191,12 @@ class Maze extends Component {
         }
       }
       
+      // Repeat steps above for the remaining cells around the cell the mouse cursor is over
       if(currentCell + down <= cells.length - 1) {
         if(cells[currentCell].bottomWall === false && cells[currentCell + down].topWall === false) {
           if(cells[currentCell + down].visited === true) {
             if(cells[currentCell].endCell === true) {
-              console.log('you win');
+              this.props.onRouteChange('StartMenu');
             } else {
               cells[currentCell].visited = true;
               cells[currentCell + down].visited = false;
@@ -205,7 +209,7 @@ class Maze extends Component {
         if(cells[currentCell].leftWall === false && cells[currentCell + left].rightWall === false) {
           if(cells[currentCell + left].visited === true) {
             if(cells[currentCell].endCell === true) {
-              console.log('you win');
+              this.props.onRouteChange('StartMenu');
             } else {
               cells[currentCell].visited = true;
               cells[currentCell + left].visited = false;
@@ -218,7 +222,7 @@ class Maze extends Component {
         if(cells[currentCell].rightWall === false && cells[currentCell + right].leftWall === false) {
           if(cells[currentCell + right].visited === true) {
             if(cells[currentCell].endCell === true) {
-              console.log('you win');
+              this.props.onRouteChange('StartMenu');
             } else {
               cells[currentCell].visited = true;
               cells[currentCell + right].visited = false;
